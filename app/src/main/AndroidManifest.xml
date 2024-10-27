@@ -41,6 +41,22 @@
             android:theme="@style/Theme.FamilyFlow">
         </activity>
 
+        <!-- CHousehold Activity setup -->
+        <activity
+            android:name=".CHouseholdActivity"
+            android:exported="true"
+            android:label="Create Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- EHousehold Activity setup -->
+        <activity
+            android:name=".EHouseholdActivity"
+            android:exported="true"
+            android:label="Enter Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
     </application>
 
 </manifest>
