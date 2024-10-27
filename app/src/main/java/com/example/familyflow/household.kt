@@ -1,5 +1,6 @@
 package com.example.familyflow
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,14 +27,32 @@ class HouseholdActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FamilyFlowTheme {
-                HouseholdScreen()
+                HouseholdScreen(
+                    onAddHouseholdClick = { navigateToCHousehold() },
+                    onEnterExistingHouseholdClick = { navigateToEHousehold() }
+                )
             }
         }
+    }
+
+    private fun navigateToCHousehold() {
+        // Create an Intent to start the CHouseholdActivity
+        val intent = Intent(this, CHouseholdActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToEHousehold() {
+        // Create an Intent to start the EHouseholdActivity
+        val intent = Intent(this, EHouseholdActivity::class.java)
+        startActivity(intent)
     }
 }
 
 @Composable
-fun HouseholdScreen() {
+fun HouseholdScreen(
+    onAddHouseholdClick: () -> Unit,
+    onEnterExistingHouseholdClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,14 +83,14 @@ fun HouseholdScreen() {
 
         GradientButton(
             text = "+ Add Household",
-            onClick = { /* Handle Add Household action */ }
+            onClick = onAddHouseholdClick
         )
 
         Spacer(modifier = Modifier.height(8.dp)) // Reduced space between the buttons
 
         GradientButton(
             text = "Enter Existing Household",
-            onClick = { /* Handle Enter Existing Household action */ }
+            onClick = onEnterExistingHouseholdClick
         )
     }
 }
@@ -112,6 +131,9 @@ fun GradientButton(text: String, onClick: () -> Unit) {
 @Composable
 fun HouseholdScreenPreview() {
     FamilyFlowTheme {
-        HouseholdScreen()
+        HouseholdScreen(
+            onAddHouseholdClick = { /* Do nothing in preview */ },
+            onEnterExistingHouseholdClick = { /* Do nothing in preview */ }
+        )
     }
 }
