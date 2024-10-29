@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\layout_event_item.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\event_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\drawable_rounded_corners.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\drawable\\rounded_corners.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-pngs-38:\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.familyflow.app-debug-42:/layout_add_event.xml.flat",
+        "source": "com.example.familyflow.app-main-44:/layout/add_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\layout_add_event.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\add_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.familyflow.app-debug-42:/drawable_arrowback16.png.flat",
+        "source": "com.example.familyflow.app-main-44:/drawable/arrowback16.png"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\layout_layout.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "com.example.familyflow.app-debug-42:/layout_layout.xml.flat",
+        "source": "com.example.familyflow.app-main-44:/layout/layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\drawable_rounded_top.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\drawable\\rounded_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-debug-42:\\drawable_back_arrow_icon.xml.flat",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\drawable\\back_arrow_icon.xml"
+    }
+]

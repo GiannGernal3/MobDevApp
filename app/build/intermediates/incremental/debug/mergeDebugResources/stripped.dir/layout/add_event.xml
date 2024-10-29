@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="656dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/rounded_top"
+        android:padding="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Calendar"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="36dp"
+                android:layout_height="34dp"
+                android:background="@drawable/arrowback16"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="281dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/rounded_corners" />
+
+        <TextView
+            android:id="@+id/editTextDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-190dp"
+            android:textSize="22dp"
+            android:text="Date"
+            android:inputType="date"
+            android:layout_gravity="center"
+            android:textColor="#14358C"
+            android:textStyle="bold"
+            android:layout_above="@+id/view" />
+
+        <TextView
+            android:id="@+id/TextDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-145dp"
+            android:layout_marginLeft="-100dp"
+            android:textSize="22dp"
+            android:text="Event Caption"
+            android:layout_gravity="center"
+            android:textColor="#14358C"
+            android:textStyle="bold"
+            android:layout_above="@+id/view" />
+
+        <EditText
+            android:id="@+id/editTextView"
+            android:layout_width="340dp"
+            android:layout_height="67dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-110dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#00C3FD"
+            android:text="Add Event" />
+
+
+    </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

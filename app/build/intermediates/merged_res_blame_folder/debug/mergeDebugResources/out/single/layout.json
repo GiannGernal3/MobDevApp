@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.example.familyflow.app-mergeDebugResources-41:/layout/add_event.xml",
+        "source": "com.example.familyflow.app-main-44:/layout/add_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-mergeDebugResources-41:\\layout\\layout.xml",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-mergeDebugResources-41:\\layout\\add_event.xml",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\add_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-mergeDebugResources-41:\\layout\\event_item.xml",
+        "source": "C:\\Users\\Giann\\.gradle\\daemon\\8.9\\com.example.familyflow.app-main-44:\\layout\\event_item.xml"
+    },
+    {
+        "merged": "com.example.familyflow.app-mergeDebugResources-41:/layout/layout.xml",
+        "source": "com.example.familyflow.app-main-44:/layout/layout.xml"
+    }
+]

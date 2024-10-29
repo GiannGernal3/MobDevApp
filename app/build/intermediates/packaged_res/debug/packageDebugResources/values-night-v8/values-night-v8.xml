@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="calendar_background">#FFFFFF</color>
+    <color name="calendar_text">#000000</color>
+    <style name="CalendarDateTextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="CalendarHeaderTextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="CalendarWeekDayTextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="MyCalendarViewStyle" parent="android:Widget.CalendarView">
+        <item name="android:background">@drawable/rounded_corners</item>
+        <item name="android:textColor">@color/black</item> 
+        <item name="android:weekDayTextAppearance">@style/CalendarWeekDayTextAppearance</item>
+        <item name="android:dateTextAppearance">@style/CalendarDateTextAppearance</item>
+        <item name="android:headerYearTextAppearance">@style/CalendarHeaderTextAppearance</item>
+        <item name="android:headerMonthTextAppearance">@style/CalendarHeaderTextAppearance</item>
+    </style>
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+    <style name="Theme.FamilyFlow" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+</resources>

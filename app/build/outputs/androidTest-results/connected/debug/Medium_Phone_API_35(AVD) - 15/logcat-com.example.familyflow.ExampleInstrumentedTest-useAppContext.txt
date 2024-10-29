@@ -1,0 +1,2 @@
+10-28 14:10:51.185 21194 21207 I TestRunner: started: useAppContext(com.example.familyflow.ExampleInstrumentedTest)
+10-28 14:10:51.189 21194 21207 I TestRunner: finished: useAppContext(com.example.familyflow.ExampleInstrumentedTest)
