@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:background="@color/white">
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_top">
+
+            <FrameLayout
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="354dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_5735921">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clean your room"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="292dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_5735921">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clean your room"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="230dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_5735921">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clean your room"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+
+
+            </FrameLayout>
+
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="34dp"
+                android:background="@drawable/arrowback16"
+                android:layout_marginLeft="350dp"
+                android:layout_marginTop="38dp">
+
+            </ImageButton>
+
+            <SearchView
+                android:layout_width="310dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_corners"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp">
+
+            </SearchView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chats"
+                android:textSize="40sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="90dp">
+
+            </TextView>
+
+            <FrameLayout
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="168dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_5735921">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textSize="25dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clean your room"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginLeft="60dp">
+
+                </TextView>
+
+
+
+            </FrameLayout>
+
+
+        </FrameLayout>
+
+
+
+
+    </FrameLayout>
+
+</LinearLayout>
