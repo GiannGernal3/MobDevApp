@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="calendar_background">#FFFFFF</color> <!-- Dark mode background color -->
+    <color name="calendar_text">#000000</color>       <!-- Dark mode text color -->
+    <!-- Define other colors as needed for dark mode -->
+</resources>
