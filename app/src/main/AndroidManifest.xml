@@ -57,6 +57,13 @@
             android:theme="@style/Theme.FamilyFlow">
         </activity>
 
+        <activity
+            android:name=".ManageHousehold"
+            android:exported="true"
+            android:label="Manage Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
     </application>
 
 </manifest>
