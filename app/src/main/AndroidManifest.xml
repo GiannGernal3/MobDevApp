@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FamilyFlow"
+        tools:targetApi="31">
+
+        <!-- Main Activity setup (Launch Activity) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.FamilyFlow">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Login Activity setup -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="Login"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Household Activity setup -->
+        <activity
+            android:name=".HouseholdActivity"
+            android:exported="true"
+            android:label="Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Create Household Activity setup -->
+        <activity
+            android:name=".CHouseholdActivity"
+            android:exported="true"
+            android:label="Create Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Enter Household Activity setup -->
+        <activity
+            android:name=".EHouseholdActivity"
+            android:exported="true"
+            android:label="Enter Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Calendar Event Activity setup -->
+        <activity
+            android:name=".CalendarEvent"
+            android:exported="true"
+            android:label="Event Calendar"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Budget Activity setup -->
+        <activity
+            android:name=".BudgetActivity"
+            android:exported="true"
+            android:label="Budget Screen"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Manage Household Activity setup -->
+        <activity
+            android:name=".ManageHousehold"
+            android:exported="true"
+            android:label="Manage Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Chats Activity setup -->
+        <activity
+            android:name=".ui.ChatsActivity"
+            android:exported="true"
+            android:label="Chats"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <activity
+            android:name=".mHousehold"
+            android:exported="true"
+            android:label="Chats"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+    </application>
+
+</manifest>
