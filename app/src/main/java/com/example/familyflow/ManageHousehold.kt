@@ -54,6 +54,14 @@ class ManageHousehold : ComponentActivity() {
                         val intent = Intent(this, KitchenActivity::class.java)
                         startActivity(intent)
                     },
+                    onBathroomClick = {
+                        val intent = Intent(this, BathroomActivity::class.java)
+                        startActivity(intent)
+                    },
+                    onLivingRoomClick = {
+                        val intent = Intent(this, LivingRoomActivity::class.java)
+                        startActivity(intent)
+                    },
                     onChatsClick = {
                         val intent = Intent(this, ChatsActivity::class.java)
                         startActivity(intent)
@@ -79,6 +87,8 @@ class ManageHousehold : ComponentActivity() {
 @Composable
 fun ManageHouseholdScreen(
     onKitchenClick: () -> Unit,
+    onBathroomClick: () -> Unit,
+    onLivingRoomClick: () -> Unit,
     onChatsClick: () -> Unit,
     onEventCalendarClick: () -> Unit,
     onBudgetClick: () -> Unit,
@@ -181,7 +191,7 @@ fun ManageHouseholdScreen(
                     iconSize = 60.dp,
                     padding = 12.dp,
                     modifier = Modifier.weight(1f),
-                    onClick = onKitchenClick // Added click functionality for Kitchen
+                    onClick = onKitchenClick
                 )
                 CustomBoxItem(
                     text = "Bathroom",
@@ -190,7 +200,8 @@ fun ManageHouseholdScreen(
                     imageResource = R.drawable.bathroom,
                     iconSize = 60.dp,
                     padding = 12.dp,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = onBathroomClick // Added click functionality for Bathroom
                 )
             }
 
@@ -208,7 +219,8 @@ fun ManageHouseholdScreen(
                     imageResource = R.drawable.livingroom,
                     iconSize = 60.dp,
                     padding = 12.dp,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    onClick = onLivingRoomClick // Added click functionality for Living Room
                 )
                 CustomBoxItem(
                     text = "Office",
@@ -428,7 +440,7 @@ fun CustomBoxItem(
                 ),
                 shape = RoundedCornerShape(16.dp)
             )
-            .clickable { onClick() } // Added onClick to make the box interactive
+            .clickable { onClick() }
             .padding(padding),
         contentAlignment = Alignment.Center
     ) {
@@ -458,6 +470,8 @@ fun PreviewManageHouseholdScreen() {
     FamilyFlowTheme {
         ManageHouseholdScreen(
             onKitchenClick = {},
+            onBathroomClick = {},
+            onLivingRoomClick = {},
             onChatsClick = {},
             onEventCalendarClick = {},
             onBudgetClick = {},
