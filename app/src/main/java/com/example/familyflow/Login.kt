@@ -182,6 +182,7 @@ fun SignUpContent() {
     var email by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     LoginTextField(
         label = "Email",
@@ -213,7 +214,9 @@ fun SignUpContent() {
             .height(50.dp)
             .padding(horizontal = 32.dp)
     ) {
-        // Handle sign-up click
+        // Navigate to HouseholdActivity when the sign-up button is clicked
+        val intent = Intent(context, HouseholdActivity::class.java)
+        context.startActivity(intent)
     }
 
     Spacer(modifier = Modifier.height(16.dp))

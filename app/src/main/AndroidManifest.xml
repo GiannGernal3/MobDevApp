@@ -41,6 +41,82 @@
             android:theme="@style/Theme.FamilyFlow">
         </activity>
 
+        <!-- Create Household Activity setup -->
+        <activity
+            android:name=".CHouseholdActivity"
+            android:exported="true"
+            android:label="Create Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Enter Household Activity setup -->
+        <activity
+            android:name=".EHouseholdActivity"
+            android:exported="true"
+            android:label="Enter Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Calendar Event Activity setup -->
+        <activity
+            android:name=".CalendarEvent"
+            android:exported="true"
+            android:label="Event Calendar"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Budget Activity setup -->
+        <activity
+            android:name=".BudgetActivity"
+            android:exported="true"
+            android:label="Budget Screen"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Manage Household Activity setup -->
+        <activity
+            android:name=".ManageHousehold"
+            android:exported="true"
+            android:label="Manage Household"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <!-- Chats Activity setup -->
+        <activity
+            android:name=".ui.ChatsActivity"
+            android:exported="true"
+            android:label="Chats"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <activity
+            android:name=".KitchenActivity"
+            android:exported="true"
+            android:label="Kitchen Screen"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <activity
+            android:name=".BathroomActivity"
+            android:exported="true"
+            android:label="Bathroom Screen"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <activity
+            android:name=".LivingRoomActivity"
+            android:exported="true"
+            android:label="Livingroom Screen"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
+        <activity
+            android:name=".mHousehold"
+            android:exported="true"
+            android:label="Chats"
+            android:theme="@style/Theme.FamilyFlow">
+        </activity>
+
     </application>
 
 </manifest>
