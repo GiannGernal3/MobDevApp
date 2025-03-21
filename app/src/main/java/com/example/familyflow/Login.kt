@@ -2,8 +2,11 @@ package com.example.familyflow
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,6 +14,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -21,20 +25,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.familyflow.logins.UserViewModel
 import com.example.familyflow.ui.theme.FamilyFlowTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 class LoginActivity : ComponentActivity() {
+    // Use the UserViewModel from the logins package
+    private val viewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             FamilyFlowTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) {
-                    LoginSignUpScreen()
+                Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
+                    LoginSignUpScreen(
+                        viewModel = viewModel,
+                        modifier = Modifier.padding(paddingValues)
+                    )
                 }
             }
         }
@@ -43,9 +52,39 @@ class LoginActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginSignUpScreen() {
+fun LoginSignUpScreen(
+    viewModel: UserViewModel,
+    modifier: Modifier = Modifier
+) {
     var isSignUp by remember { mutableStateOf(false) }
     val context = LocalContext.current
+
+    // Observe loading state
+    val isLoading by viewModel.isLoading.observeAsState(initial = false)
+
+    // Observe status messages
+    val statusMessage by viewModel.statusMessage.observeAsState()
+
+    // Observe authentication status
+    val isAuthenticated by viewModel.isAuthenticated.observeAsState()
+
+    // Handle authentication status changes
+    LaunchedEffect(isAuthenticated) {
+        isAuthenticated?.getContentIfNotHandled()?.let { authenticated ->
+            if (authenticated) {
+                // Navigate to HouseholdActivity when successfully authenticated
+                val intent = Intent(context, HouseholdActivity::class.java)
+                context.startActivity(intent)
+            }
+        }
+    }
+
+    // Handle status messages
+    LaunchedEffect(statusMessage) {
+        statusMessage?.getContentIfNotHandled()?.let { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -74,12 +113,7 @@ fun LoginSignUpScreen() {
                     contentDescription = "Family Flow Logo",
                     modifier = Modifier
                         .height(80.dp)
-                        .width(80.dp)
-                        .clickable {
-                            // Navigate to MainActivity when the logo is clicked
-                            val intent = Intent(context, HouseholdActivity::class.java)
-                            context.startActivity(intent)
-                        },
+                        .width(80.dp),
                     contentScale = ContentScale.Fit
                 )
 
@@ -133,33 +167,54 @@ fun LoginSignUpScreen() {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 if (isSignUp) {
-                    SignUpContent()
+                    SignUpContent(viewModel)
                 } else {
-                    LoginContent()
+                    LoginContent(viewModel)
                 }
+            }
+        }
+
+        // Show loading overlay if needed
+        if (isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.4f)),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = Color.White)
             }
         }
     }
 }
 
 @Composable
-fun LoginContent() {
-    var username by remember { mutableStateOf("") }
+fun LoginContent(viewModel: UserViewModel) {
+    var usernameOrEmail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val context = LocalContext.current
+    var usernameError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
 
     LoginTextField(
         label = "Username/Email",
-        value = username,
-        onValueChange = { username = it },
-        isPassword = false
+        value = usernameOrEmail,
+        onValueChange = {
+            usernameOrEmail = it
+            usernameError = null
+        },
+        isPassword = false,
+        errorMessage = usernameError
     )
     Spacer(modifier = Modifier.height(16.dp))
     LoginTextField(
         label = "Password",
         isPassword = true,
         value = password,
-        onValueChange = { password = it }
+        onValueChange = {
+            password = it
+            passwordError = null
+        },
+        errorMessage = passwordError
     )
 
     Spacer(modifier = Modifier.height(24.dp))
@@ -171,38 +226,81 @@ fun LoginContent() {
             .height(50.dp)
             .padding(horizontal = 32.dp)
     ) {
-        // Navigate to HouseholdActivity when the login button is clicked
-        val intent = Intent(context, HouseholdActivity::class.java)
-        context.startActivity(intent)
+        // Validate form
+        var isValid = true
+
+        if (usernameOrEmail.isBlank()) {
+            usernameError = "Please enter your username or email"
+            isValid = false
+        }
+
+        if (password.isBlank()) {
+            passwordError = "Please enter your password"
+            isValid = false
+        }
+
+        if (isValid) {
+            // Call ViewModel to authenticate user
+            viewModel.loginUser(usernameOrEmail, password)
+        }
     }
 }
 
 @Composable
-fun SignUpContent() {
+fun SignUpContent(viewModel: UserViewModel) {
     var email by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val context = LocalContext.current
+    var confirmPassword by remember { mutableStateOf("") }
+
+    // Validation error states
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var usernameError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+    var confirmPasswordError by remember { mutableStateOf<String?>(null) }
 
     LoginTextField(
         label = "Email",
         value = email,
-        onValueChange = { email = it },
-        isPassword = false
+        onValueChange = {
+            email = it
+            emailError = null
+        },
+        isPassword = false,
+        errorMessage = emailError
     )
     Spacer(modifier = Modifier.height(16.dp))
     LoginTextField(
         label = "Username",
         value = username,
-        onValueChange = { username = it },
-        isPassword = false
+        onValueChange = {
+            username = it
+            usernameError = null
+        },
+        isPassword = false,
+        errorMessage = usernameError
     )
     Spacer(modifier = Modifier.height(16.dp))
     LoginTextField(
         label = "Password",
         isPassword = true,
         value = password,
-        onValueChange = { password = it }
+        onValueChange = {
+            password = it
+            passwordError = null
+        },
+        errorMessage = passwordError
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    LoginTextField(
+        label = "Confirm Password",
+        isPassword = true,
+        value = confirmPassword,
+        onValueChange = {
+            confirmPassword = it
+            confirmPasswordError = null
+        },
+        errorMessage = confirmPasswordError
     )
 
     Spacer(modifier = Modifier.height(24.dp))
@@ -214,9 +312,42 @@ fun SignUpContent() {
             .height(50.dp)
             .padding(horizontal = 32.dp)
     ) {
-        // Navigate to HouseholdActivity when the sign-up button is clicked
-        val intent = Intent(context, HouseholdActivity::class.java)
-        context.startActivity(intent)
+        // Validate form
+        var isValid = true
+
+        if (email.isBlank()) {
+            emailError = "Please enter your email"
+            isValid = false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailError = "Please enter a valid email address"
+            isValid = false
+        }
+
+        if (username.isBlank()) {
+            usernameError = "Please enter a username"
+            isValid = false
+        } else if (username.length < 3) {
+            usernameError = "Username must be at least 3 characters"
+            isValid = false
+        }
+
+        if (password.isBlank()) {
+            passwordError = "Please enter a password"
+            isValid = false
+        } else if (password.length < 6) {
+            passwordError = "Password must be at least 6 characters"
+            isValid = false
+        }
+
+        if (confirmPassword != password) {
+            confirmPasswordError = "Passwords do not match"
+            isValid = false
+        }
+
+        if (isValid) {
+            // Call ViewModel to register user
+            viewModel.registerUser(username, email, password)
+        }
     }
 
     Spacer(modifier = Modifier.height(16.dp))
@@ -278,30 +409,52 @@ fun GradientButton(text: String, modifier: Modifier, onClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginTextField(label: String, value: String, onValueChange: (String) -> Unit, isPassword: Boolean) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        singleLine = true,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color(0xFF1976D2),
-            unfocusedBorderColor = Color.Gray,
-            cursorColor = Color(0xFF1976D2),
-            focusedLabelColor = Color(0xFF1976D2),
-            unfocusedLabelColor = Color.Gray
+fun LoginTextField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    isPassword: Boolean,
+    errorMessage: String? = null
+) {
+    Column {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(label) },
+            visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+            singleLine = true,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color(0xFF1976D2),
+                unfocusedBorderColor = Color.Gray,
+                cursorColor = Color(0xFF1976D2),
+                focusedLabelColor = Color(0xFF1976D2),
+                unfocusedLabelColor = Color.Gray,
+                errorBorderColor = Color.Red,
+                errorLabelColor = Color.Red
+            ),
+            isError = errorMessage != null,
+            supportingText = {
+                if (errorMessage != null) {
+                    Text(
+                        text = errorMessage,
+                        color = Color.Red,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
         )
-    )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LoginSignUpScreenPreview() {
     FamilyFlowTheme {
-        LoginSignUpScreen()
+        LoginSignUpScreen(
+            viewModel = UserViewModel(android.app.Application())
+        )
     }
 }

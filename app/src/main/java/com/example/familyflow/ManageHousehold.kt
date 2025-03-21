@@ -1,5 +1,6 @@
 package com.example.familyflow
 
+// Ensure all necessary imports
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,6 +10,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,12 +19,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,17 +33,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.familyflow.ui.ChatsActivity
 import com.example.familyflow.ui.theme.FamilyFlowTheme
+import kotlin.math.roundToInt
 
 class ManageHousehold : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,25 +99,26 @@ fun ManageHouseholdScreen(
     onBudgetClick: () -> Unit,
     onManageHouseholdClick: () -> Unit
 ) {
+    var touchMessage by remember { mutableStateOf("") }
     var isNavigationVisible by remember { mutableStateOf(false) }
     var isNotificationVisible by remember { mutableStateOf(false) }
+
     val navigationHeight by animateDpAsState(
         targetValue = if (isNavigationVisible) 300.dp else 0.dp,
-        animationSpec = tween(durationMillis = 300)
+        animationSpec = tween(durationMillis = 300),
+        label = "Navigation Height"
     )
+
     val notificationHeight by animateDpAsState(
         targetValue = if (isNotificationVisible) 300.dp else 0.dp,
-        animationSpec = tween(durationMillis = 300)
+        animationSpec = tween(durationMillis = 300),
+        label = "Notification Height"
     )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .clickable(enabled = isNavigationVisible || isNotificationVisible) {
-                isNavigationVisible = false
-                isNotificationVisible = false
-            }
     ) {
         Column(
             modifier = Modifier
@@ -122,6 +128,14 @@ fun ManageHouseholdScreen(
             ManageHouseholdTopAppBar(onNotificationClick = { isNotificationVisible = true })
 
             Spacer(modifier = Modifier.height(16.dp))
+
+            // Debugging text to show touch phases
+            Text(
+                text = touchMessage,
+                fontSize = 18.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(8.dp)
+            )
 
             // Family Name
             Text(
@@ -146,7 +160,6 @@ fun ManageHouseholdScreen(
                         ),
                         shape = RoundedCornerShape(16.dp)
                     )
-                    .clickable { onManageHouseholdClick() }
                     .padding(16.dp)
             ) {
                 Row(
@@ -183,7 +196,7 @@ fun ManageHouseholdScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "Kitchen",
                     backgroundColorStart = Color(0xFF8BC34A),
                     backgroundColorEnd = Color(0xFF689F38),
@@ -193,7 +206,7 @@ fun ManageHouseholdScreen(
                     modifier = Modifier.weight(1f),
                     onClick = onKitchenClick
                 )
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "Bathroom",
                     backgroundColorStart = Color(0xFFF48FB1),
                     backgroundColorEnd = Color(0xFFC2185B),
@@ -201,7 +214,7 @@ fun ManageHouseholdScreen(
                     iconSize = 60.dp,
                     padding = 12.dp,
                     modifier = Modifier.weight(1f),
-                    onClick = onBathroomClick // Added click functionality for Bathroom
+                    onClick = onBathroomClick
                 )
             }
 
@@ -212,7 +225,7 @@ fun ManageHouseholdScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "Living Room",
                     backgroundColorStart = Color(0xFFB0BEC5),
                     backgroundColorEnd = Color(0xFF455A64),
@@ -220,9 +233,9 @@ fun ManageHouseholdScreen(
                     iconSize = 60.dp,
                     padding = 12.dp,
                     modifier = Modifier.weight(1f),
-                    onClick = onLivingRoomClick // Added click functionality for Living Room
+                    onClick = onLivingRoomClick
                 )
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "Office",
                     backgroundColorStart = Color(0xFF9575CD),
                     backgroundColorEnd = Color(0xFF512DA8),
@@ -240,7 +253,7 @@ fun ManageHouseholdScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "Garden",
                     backgroundColorStart = Color(0xFFD1C4E9),
                     backgroundColorEnd = Color(0xFF7E57C2),
@@ -249,7 +262,7 @@ fun ManageHouseholdScreen(
                     padding = 12.dp,
                     modifier = Modifier.weight(1f)
                 )
-                CustomBoxItem(
+                DraggableBoxItem(
                     text = "",
                     backgroundColorStart = Color(0xFF90CAF9),
                     backgroundColorEnd = Color(0xFF42A5F5),
@@ -285,92 +298,60 @@ fun ManageHouseholdScreen(
                     )
                 }
             }
-        }
 
-        // Navigation Drawer
-        if (navigationHeight > 0.dp) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(navigationHeight)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF42A5F5), Color(0xFF90CAF9))
-                        ),
-                        shape = RoundedCornerShape(16.dp)
-                    )
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-                    .clickable { isNavigationVisible = false }
-            ) {
-                Column {
-                    Text(
-                        text = "Manage Household",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                            .clickable { onManageHouseholdClick() }
-                    )
-                    Text(
-                        text = "Chats",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                            .clickable { onChatsClick() }
-                    )
-                    Text(
-                        text = "Event Calendar",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                            .clickable { onEventCalendarClick() }
-                    )
-                    Text(
-                        text = "Budget Port",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                            .clickable { onBudgetClick() }
-                    )
-                }
-            }
-        }
-
-        // Notification Drawer
-        if (notificationHeight > 0.dp) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(notificationHeight)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF90CAF9), Color(0xFF42A5F5))
-                        ),
-                        shape = RoundedCornerShape(16.dp)
-                    )
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-                    .clickable { isNotificationVisible = false }
-            ) {
-                Column {
-                    Text(
-                        text = "Notifications",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    NotificationItem("Chore reminder: Wash the dishes")
-                    NotificationItem("New message from Mom")
-                    NotificationItem("Upcoming event: Family gathering")
+            // Navigation Drawer - Appears when isNavigationVisible is true
+            if (isNavigationVisible) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(navigationHeight)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(Color(0xFF42A5F5), Color(0xFF90CAF9))
+                            ),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .padding(16.dp)
+                        .clickable { isNavigationVisible = false }
+                ) {
+                    Column {
+                        Text(
+                            text = "Manage Household",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .clickable { onManageHouseholdClick() }
+                        )
+                        Text(
+                            text = "Chats",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .clickable { onChatsClick() }
+                        )
+                        Text(
+                            text = "Event Calendar",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .clickable { onEventCalendarClick() }
+                        )
+                        Text(
+                            text = "Budget Port",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .clickable { onBudgetClick() }
+                        )
+                    }
                 }
             }
         }
@@ -411,17 +392,7 @@ fun ManageHouseholdTopAppBar(onNotificationClick: () -> Unit) {
 }
 
 @Composable
-fun NotificationItem(text: String) {
-    Text(
-        text = text,
-        fontSize = 16.sp,
-        color = Color.Black,
-        modifier = Modifier.padding(vertical = 4.dp)
-    )
-}
-
-@Composable
-fun CustomBoxItem(
+fun DraggableBoxItem(
     text: String,
     backgroundColorStart: Color,
     backgroundColorEnd: Color,
@@ -432,8 +403,11 @@ fun CustomBoxItem(
     showText: Boolean = true,
     onClick: () -> Unit = {}
 ) {
+    var offset by remember { mutableStateOf(Offset(0f, 0f)) }
+
     Box(
         modifier = modifier
+            .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
             .background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(backgroundColorStart, backgroundColorEnd)
@@ -441,7 +415,12 @@ fun CustomBoxItem(
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable { onClick() }
-            .padding(padding),
+            .padding(padding)
+            .pointerInput(Unit) {
+                detectDragGestures { _, dragAmount ->
+                    offset = Offset(offset.x + dragAmount.x, offset.y + dragAmount.y)
+                }
+            },
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {

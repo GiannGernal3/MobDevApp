@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -42,10 +44,12 @@ class EHouseholdActivity : ComponentActivity() {
         setContent {
             FamilyFlowTheme {
                 EnterHouseholdScreen(
-                    onEnterClick = {
-                        if (it.length == 4) { // Check if the code is complete
+                    onEnterClick = { enteredPin ->
+                        if (enteredPin == "1234") { // Correct pin
                             val intent = Intent(this, ManageHousehold::class.java)
                             startActivity(intent)
+                        } else {
+                            // Incorrect pin, trigger shake animation
                         }
                     }
                 )
@@ -57,6 +61,14 @@ class EHouseholdActivity : ComponentActivity() {
 @Composable
 fun EnterHouseholdScreen(onEnterClick: (String) -> Unit = {}) {
     var code by remember { mutableStateOf("") }
+    var isError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+
+    // Shake effect based on error state
+    val shakeAnimation by animateFloatAsState(
+        targetValue = if (isError) 10f else 0f,
+        animationSpec = tween(durationMillis = 300),
+    )
 
     Column(
         modifier = Modifier
@@ -100,7 +112,8 @@ fun EnterHouseholdScreen(onEnterClick: (String) -> Unit = {}) {
                         )
                     ),
                     shape = RoundedCornerShape(12.dp)
-                ),
+                )
+                .padding(start = shakeAnimation.dp), // Apply shake effect here
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -114,6 +127,19 @@ fun EnterHouseholdScreen(onEnterClick: (String) -> Unit = {}) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        // Display error message if the pin is incorrect
+        if (isError) {
+            Text(
+                text = errorMessage,
+                color = Color.Red,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         // Keypad Layout
         Keypad(onNumberClick = { number ->
             if (code.length < 4) {
@@ -124,7 +150,15 @@ fun EnterHouseholdScreen(onEnterClick: (String) -> Unit = {}) {
                 code = code.dropLast(1)
             }
         }, onEnterClick = {
-            onEnterClick(code)
+            // Check pin and trigger error if incorrect
+            if (code == "1234") {
+                onEnterClick(code) // Correct pin entered
+            } else {
+                isError = true
+                errorMessage = "Incorrect PIN! Please try again."
+                // Reset the code after an error
+                code = ""
+            }
         })
     }
 }

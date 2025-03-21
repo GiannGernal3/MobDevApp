@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Add Internet Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FamilyFlow"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <!-- Main Activity setup (Launch Activity) -->
@@ -116,6 +121,21 @@
             android:label="Chats"
             android:theme="@style/Theme.FamilyFlow">
         </activity>
+
+        <!-- Network Change Receiver -->
+        <receiver
+            android:name=".service.NetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Data Sync Service -->
+        <service
+            android:name=".service.DataSyncService"
+            android:exported="false" />
 
     </application>
 
